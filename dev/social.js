@@ -8,7 +8,8 @@ const config = {
     },
     networks: {
         facebook: {
-            title: "title"
+            title: "title",
+            description: "description"
         }
     }
 };

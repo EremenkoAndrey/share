@@ -14,7 +14,7 @@ export default class Facebook extends ShareButton {
                             height=450,
                             top=200,
                             left=${(window.innerWidth / 2) - (popupWidth / 2)}`;
-        window.open(url, 'WIND', winParams);
+        window.open(url, '', winParams);
     }
     _getUrl() {
         const baseUrl = 'https://www.facebook.com/sharer.php?';

@@ -89,7 +89,8 @@ var config = {
     },
     networks: {
         facebook: {
-            title: "title"
+            title: "title",
+            description: "description"
         }
     }
 };
@@ -204,7 +205,7 @@ var Facebook = function (_ShareButton) {
             var url = this._getUrl();
             var popupWidth = 650;
             var winParams = 'toolbar=0, \n                            status=0, \n                            width=' + popupWidth + ', \n                            height=450,\n                            top=200,\n                            left=' + (window.innerWidth / 2 - popupWidth / 2);
-            window.open(url, 'WIND', winParams);
+            window.open(url, '', winParams);
         }
     }, {
         key: '_getUrl',
