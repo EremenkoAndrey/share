@@ -1,0 +1,38 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "mocha": true,
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "globals": {
+    // Отключить сообщения о необъявленных глобальных переменных
+    "fetch": false,
+    "window": false
+  },
+  "rules": {
+    // Переносы строк для разработки на windows
+    "linebreak-style": ["off"],
+    // 4 пробела
+    "indent": ["error", 4],
+    // Разрешить нижние подчеркивания
+    "no-underscore-dangle": ["off"],
+    // Разрешить пропуск строк в коде
+    "no-trailing-spaces": ["off"],
+    // Не ставить запятые в после последнего элемента структуры
+    "comma-dangle": ["error", "never"],
+    // Разрешить определение после использования только для функций
+    "no-use-before-define": ["error", { "functions": false }],
+    // Разрешить функциям ничего не возвращать
+    "consistent-return": ["off"],
+    // Разрешить побитовые операции сравнения с -1 и округление до целого
+    "no-bitwise": ["error", { "allow": ["^", "~"] }],
+    // Отключаю всякую фигню, которая усложняет использование путей bundle-loader
+    "import/no-unresolved": ["off"],
+    "import/no-webpack-loader-syntax": ["off"],
+    "import/no-extraneous-dependencies": ["off"],
+    "import/extensions": ["off"]
+  }
+}
