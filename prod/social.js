@@ -205,6 +205,7 @@ var Facebook = function (_ShareButton) {
             var url = this._getUrl();
             var popupWidth = 650;
             var winParams = 'toolbar=0, \n                            status=0, \n                            width=' + popupWidth + ', \n                            height=450,\n                            top=200,\n                            left=' + (window.innerWidth / 2 - popupWidth / 2);
+            console.log(url);
             window.open(url, '', winParams);
         }
     }, {

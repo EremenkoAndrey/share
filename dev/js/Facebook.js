@@ -14,6 +14,7 @@ export default class Facebook extends ShareButton {
                             height=450,
                             top=200,
                             left=${(window.innerWidth / 2) - (popupWidth / 2)}`;
+        console.log(url)
         window.open(url, '', winParams);
     }
     _getUrl() {
