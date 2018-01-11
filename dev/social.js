@@ -2,42 +2,60 @@ import './index.less';
 import Facebook from './js/Facebook';
 
 const config = {
-    blockClassName: 'sharing',
-    elementClassName: 'item',
+    classNames: {
+        block: 'sharing',
+        elements: 'sharing__item'
+    },
     networks: {
         facebook: {
-
+            title: "title"
         }
     }
 };
 
 class Socials {
-    create(element, options) {
-        const css = {
-            block: options.blockClassName || 'sharing',
-            element: options.elementClassName ? `${options.blockClassName}__${options.elementClassName}` : 'sharing__item'
-        };
-        const ul = document.createElement('ul');
-        ul.className = css.block;
-
-        Object.keys(options.networks).forEach((network) => {
-            const el = document.createElement('li');
-            el.className = `${css.element} ${css.element}_${network}`;
-            this.initNetwork(network, el);
-            ul.insertBefore(el, null);
-        });
-        element.insertBefore(ul, null);
+    constructor(element, options) {
+        this.element = element;
+        this.options = options;
     }
 
-    initNetwork(name, element) {
+    init() {
+        const { classNames, networks } = this.options;
+        const list = this._createElementsList(networks, classNames);
+        this.element.insertBefore(list, null);
+        list.addEventListener('click', (event) => {
+            if (!event.target.dataset.name) return;
+            const networkName = event.target.dataset.name;
+            this._initNetwork(networkName, config.networks[networkName]);
+        });
+    }
+
+    _initNetwork(name, params) {
         switch (name) {
         case 'facebook':
-            new Facebook().init(element);
+            new Facebook(params).show();
             return true;
         default:
             return false;
         }
     }
+
+    _createElementsList(networks, classNames) {
+        const css = {
+            block: classNames.block || 'sharing',
+            element: classNames.elements ? `${classNames.elements}` : 'sharing__item'
+        };
+        const ul = document.createElement('ul');
+        ul.className = css.block;
+
+        Object.keys(networks).forEach((network) => {
+            const el = document.createElement('li');
+            el.className = `${css.element} ${css.element}_${network}`;
+            el.dataset.name = network;
+            ul.insertBefore(el, null);
+        });
+        return ul;
+    }
 }
 
-new Socials().create(document.getElementById('social-container'), config);
+new Socials(document.getElementById('social-container'), config).init();

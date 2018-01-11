@@ -83,55 +83,77 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var config = {
-    blockClassName: 'sharing',
-    elementClassName: 'item',
+    classNames: {
+        block: 'sharing',
+        elements: 'sharing__item'
+    },
     networks: {
-        facebook: {}
+        facebook: {
+            title: "title"
+        }
     }
 };
 
 var Socials = function () {
-    function Socials() {
+    function Socials(element, options) {
         _classCallCheck(this, Socials);
+
+        this.element = element;
+        this.options = options;
     }
 
     _createClass(Socials, [{
-        key: 'create',
-        value: function create(element, options) {
+        key: 'init',
+        value: function init() {
             var _this = this;
 
-            var css = {
-                block: options.blockClassName || 'sharing',
-                element: options.elementClassName ? options.blockClassName + '__' + options.elementClassName : 'sharing__item'
-            };
-            var ul = document.createElement('ul');
-            ul.className = css.block;
+            var _options = this.options,
+                classNames = _options.classNames,
+                networks = _options.networks;
 
-            Object.keys(options.networks).forEach(function (network) {
-                var el = document.createElement('li');
-                el.className = css.element + ' ' + css.element + '_' + network;
-                _this.initNetwork(network, el);
-                ul.insertBefore(el, null);
+            var list = this._createElementsList(networks, classNames);
+            this.element.insertBefore(list, null);
+            list.addEventListener('click', function (event) {
+                if (!event.target.dataset.name) return;
+                var networkName = event.target.dataset.name;
+                _this._initNetwork(networkName, config.networks[networkName]);
             });
-            element.insertBefore(ul, null);
         }
     }, {
-        key: 'initNetwork',
-        value: function initNetwork(name, element) {
+        key: '_initNetwork',
+        value: function _initNetwork(name, params) {
             switch (name) {
                 case 'facebook':
-                    new _Facebook2.default().init(element);
+                    new _Facebook2.default(params).show();
                     return true;
                 default:
                     return false;
             }
+        }
+    }, {
+        key: '_createElementsList',
+        value: function _createElementsList(networks, classNames) {
+            var css = {
+                block: classNames.block || 'sharing',
+                element: classNames.elements ? '' + classNames.elements : 'sharing__item'
+            };
+            var ul = document.createElement('ul');
+            ul.className = css.block;
+
+            Object.keys(networks).forEach(function (network) {
+                var el = document.createElement('li');
+                el.className = css.element + ' ' + css.element + '_' + network;
+                el.dataset.name = network;
+                ul.insertBefore(el, null);
+            });
+            return ul;
         }
     }]);
 
     return Socials;
 }();
 
-new Socials().create(document.getElementById('social-container'), config);
+new Socials(document.getElementById('social-container'), config).init();
 
 /***/ }),
 /* 1 */
@@ -167,36 +189,37 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Facebook = function (_ShareButton) {
     _inherits(Facebook, _ShareButton);
 
-    function Facebook() {
+    function Facebook(params) {
         _classCallCheck(this, Facebook);
 
-        return _possibleConstructorReturn(this, (Facebook.__proto__ || Object.getPrototypeOf(Facebook)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Facebook.__proto__ || Object.getPrototypeOf(Facebook)).call(this, params));
+
+        _this.params = params;
+        return _this;
     }
 
     _createClass(Facebook, [{
-        key: 'init',
-        value: function init(element) {
-            console.log(this.title);
+        key: 'show',
+        value: function show() {
+            var url = this._getUrl();
+            var popupWidth = 650;
+            var winParams = 'toolbar=0, \n                            status=0, \n                            width=' + popupWidth + ', \n                            height=450,\n                            top=200,\n                            left=' + (window.innerWidth / 2 - popupWidth / 2);
+            window.open(url, 'WIND', winParams);
         }
     }, {
-        key: 'getUrl',
-        value: function getUrl() {
+        key: '_getUrl',
+        value: function _getUrl() {
             var baseUrl = 'https://www.facebook.com/sharer.php?';
             var pageUrl = window.location.href;
-            var delimeter = '&';
+            var title = this.params.title || '';
+            var description = this.params.description || '';
+
+            return baseUrl + 'src=sp&u=' + pageUrl + '&title=' + title + '&description=' + description;
         }
     }]);
 
     return Facebook;
 }(_ShareButton3.default);
-// 'https://www.facebook.com/sharer.php?' +
-// 'src=sp&' +
-// 'u=https%3A%2F%2Frussian.rt.com%962-strelba-fabrika-zalozhniki&' +
-// 'title=%C2%AB%D0%920%D1%81%D1%82%D1%80%D0%B5%%BB%D0%BE%D0%BA&' +
-// 'description=dsggsgsdgs&' +
-// 'picture=&' +
-// 'utm_source=share2
-
 
 exports.default = Facebook;
 

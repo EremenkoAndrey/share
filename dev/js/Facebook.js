@@ -1,19 +1,27 @@
 import ShareButton from './ShareButton.js';
 
 export default class Facebook extends ShareButton {
-    init(element) {
-        console.log(this.title);
+    constructor(params) {
+        super(params);
+        this.params = params;
     }
-    getUrl() {
+    show() {
+        const url = this._getUrl();
+        const popupWidth = 650;
+        const winParams = `toolbar=0, 
+                            status=0, 
+                            width=${popupWidth}, 
+                            height=450,
+                            top=200,
+                            left=${(window.innerWidth / 2) - (popupWidth / 2)}`;
+        window.open(url, 'WIND', winParams);
+    }
+    _getUrl() {
         const baseUrl = 'https://www.facebook.com/sharer.php?';
         const pageUrl = window.location.href;
-        const delimeter = '&';
+        const title = this.params.title || '';
+        const description = this.params.description || '';
+
+        return `${baseUrl}src=sp&u=${pageUrl}&title=${title}&description=${description}`;
     }
 }
-// 'https://www.facebook.com/sharer.php?' +
-// 'src=sp&' +
-// 'u=https%3A%2F%2Frussian.rt.com%962-strelba-fabrika-zalozhniki&' +
-// 'title=%C2%AB%D0%920%D1%81%D1%82%D1%80%D0%B5%%BB%D0%BE%D0%BA&' +
-// 'description=dsggsgsdgs&' +
-// 'picture=&' +
-// 'utm_source=share2
