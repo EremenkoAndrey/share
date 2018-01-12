@@ -1,6 +1,6 @@
 import ShareButton from './ShareButton.js';
 
-export default class Facebook extends ShareButton {
+export default class GooglePlus extends ShareButton {
     constructor(params) {
         super();
         this.params = params;
@@ -10,10 +10,13 @@ export default class Facebook extends ShareButton {
         this.showPopup(url);
     }
     _getUrl() {
-        const baseUrl = 'https://www.facebook.com/sharer.php?';
+        const baseUrl = 'https://plus.google.com/share?';
         const pageUrl = window.location.href;
         const title = this.params.title || document.title;
 
-        return `${baseUrl}src=sp&u=${pageUrl}&title=${title}`;
+        return `${baseUrl}t=${title}&url=${pageUrl}`;
     }
 }
+/*
+
+*/

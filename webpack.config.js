@@ -11,7 +11,7 @@ module.exports = [
         output: {
             path: path.join(__dirname, "prod"),
             filename: "social.js",
-            publicPath: "/prod/"
+            publicPath: "/Share/prod/"
         },
         resolve: {
             extensions: ['.js']
@@ -33,6 +33,15 @@ module.exports = [
                         fallback: 'style-loader',
                         use: ['css-loader', 'less-loader']
                     })
+                },
+                {
+                    test: /\.svg/,
+                    loader: 'url-loader',
+                    query: {
+                        limit: 1000,
+                        mimetype: 'image/svg+xml',
+                        name: 'img/[name].[ext]'
+                    }
                 }
             ]
         },

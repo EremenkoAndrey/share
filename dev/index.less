@@ -8,12 +8,32 @@
     vertical-align: top;
     width: 32px;
     height: 32px;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
     cursor: pointer;
+    background-repeat: no-repeat;
+    background-image: url('./icons/icons.svg');
+    background-size: 100*13% 100%;
+    background-position-y: 0;
 
     &_facebook {
-      background-image: data-uri('icons/facebook.png');
+      background-position-x: -32*2px;
+    }
+    &_twitter {
+      background-position-x: -32*1px;
+    }
+    &_reddit {
+      background-position-x: -32*12px;
+    }
+    &_google {
+      background-position-x: -32*5px;
+    }
+    &_telegram {
+      background-position-x: -32*8px;
+    }
+    &_whatsapp {
+      background-position-x: -32*10px;
+    }
+    &_fbmessenger {
+      background-position-x: -32*11px;
     }
   }
 }
