@@ -1,8 +1,8 @@
 import ShareButton from './ShareButton.js';
 
 export default class Telegram extends ShareButton {
-    constructor(params) {
-        super();
+    constructor(element, params) {
+        super(element);
         this.params = params;
     }
     show() {

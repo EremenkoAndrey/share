@@ -3,8 +3,8 @@ import ShareButton from './ShareButton.js';
 Тут необходим FB SDK
  */
 export default class FBMessenger extends ShareButton {
-    constructor(params) {
-        super();
+    constructor(element, params) {
+        super(element);
         this.params = params;
     }
     show() {

@@ -1,13 +1,65 @@
+@size: 32px;
+@interval: 0.2em;
+
 .sharing {
   list-style: none;
-  margin: 0;
+  margin: 0 -@interval;
   padding: 0;
+
+  &__item,
+  &__counter {
+    display: inline-block;
+    vertical-align: top;
+  }
 
   &__item {
     display: inline-block;
     vertical-align: top;
-    width: 32px;
-    height: 32px;
+    margin: 0 @interval;
+  }
+
+  &__counter {
+    position: relative;
+    line-height: @size - 2px;
+    font-size: 0.9em;
+    padding: 0 0.5em;
+    margin-left: 8px;
+    border: 1px solid #ccc;
+    border-radius: 0.2em;
+    &:after,
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+    &:after {
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    margin-right: -2px;
+    border-bottom: 6px solid transparent; // to top
+    border-top: 6px solid transparent; // to bottom
+    border-left: 8px solid transparent; // to right
+    border-right: 8px solid #FFF; // to left
+    }
+    &:before {
+      top: 50%;
+      right: 100%;
+      margin-top: -5px;
+      border-bottom: 6px solid transparent; // to top
+      border-top: 6px solid transparent; // to bottom
+      border-left: 8px solid transparent; // to right
+      border-right: 8px solid #CCC; // to left
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    vertical-align: top;
+    width: @size;
+    height: @size;
     cursor: pointer;
     background-repeat: no-repeat;
     background-image: url('./icons/icons.svg');
@@ -15,25 +67,25 @@
     background-position-y: 0;
 
     &_facebook {
-      background-position-x: -32*2px;
+      background-position-x: -@size*2px;
     }
     &_twitter {
-      background-position-x: -32*1px;
+      background-position-x: -@size*1px;
     }
     &_reddit {
-      background-position-x: -32*12px;
+      background-position-x: -@size*12px;
     }
     &_google {
-      background-position-x: -32*5px;
+      background-position-x: -@size*5px;
     }
     &_telegram {
-      background-position-x: -32*8px;
+      background-position-x: -@size*8px;
     }
     &_whatsapp {
-      background-position-x: -32*10px;
+      background-position-x: -@size*10px;
     }
     &_fbmessenger {
-      background-position-x: -32*11px;
+      background-position-x: -@size*11px;
     }
   }
 }

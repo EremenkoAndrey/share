@@ -79,17 +79,34 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ShareButton = function () {
-    function ShareButton() {
+    function ShareButton(element) {
+        var _this = this;
+
         _classCallCheck(this, ShareButton);
+
+        this.element = element;
+        this.onClick(function () {
+            return _this.show();
+        });
     }
 
     _createClass(ShareButton, [{
         key: 'showPopup',
         value: function showPopup(url) {
-            var popupWidth = 650;
-            var winParams = 'toolbar=0, \n                            status=0, \n                            width=' + popupWidth + ', \n                            height=450,\n                            top=200,\n                            left=' + (window.innerWidth / 2 - popupWidth / 2);
+            var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+            var popupWidth = params.width || 650;
+            var winParams = 'toolbar=0, \n                            status=0, \n                            width=' + popupWidth + ', \n                            height=' + (params.height || 450) + ',\n                            top=' + (params.top || 200) + ',\n                            left=' + (window.innerWidth / 2 - popupWidth / 2);
             window.open(url, '', winParams);
         }
+    }, {
+        key: 'onClick',
+        value: function onClick(callback) {
+            this.element.addEventListener('click', callback);
+        }
+    }, {
+        key: 'addCounter',
+        value: function addCounter() {}
     }]);
 
     return ShareButton;
@@ -108,6 +125,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(2);
 
+var _HtmlMarkup = __webpack_require__(16);
+
+var _HtmlMarkup2 = _interopRequireDefault(_HtmlMarkup);
+
 var _Facebook = __webpack_require__(3);
 
 var _Facebook2 = _interopRequireDefault(_Facebook);
@@ -116,23 +137,23 @@ var _Twitter = __webpack_require__(4);
 
 var _Twitter2 = _interopRequireDefault(_Twitter);
 
-var _Reddit = __webpack_require__(10);
+var _Reddit = __webpack_require__(5);
 
 var _Reddit2 = _interopRequireDefault(_Reddit);
 
-var _GooglePlus = __webpack_require__(11);
+var _GooglePlus = __webpack_require__(6);
 
 var _GooglePlus2 = _interopRequireDefault(_GooglePlus);
 
-var _Telegram = __webpack_require__(12);
+var _Telegram = __webpack_require__(7);
 
 var _Telegram2 = _interopRequireDefault(_Telegram);
 
-var _WhatsApp = __webpack_require__(13);
+var _WhatsApp = __webpack_require__(8);
 
 var _WhatsApp2 = _interopRequireDefault(_WhatsApp);
 
-var _FBMessenger = __webpack_require__(15);
+var _FBMessenger = __webpack_require__(9);
 
 var _FBMessenger2 = _interopRequireDefault(_FBMessenger);
 
@@ -143,7 +164,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var config = {
     classNames: {
         block: 'sharing',
-        elements: 'sharing__item'
+        elements: 'sharing__item',
+        links: 'sharing__link',
+        counters: 'sharing__counter'
     },
     networks: {
         facebook: {
@@ -179,74 +202,57 @@ var config = {
 };
 
 var Socials = function () {
-    function Socials(element, options) {
+    function Socials(root, options) {
         _classCallCheck(this, Socials);
 
-        this.element = element;
+        this.root = root;
         this.options = options;
     }
 
     _createClass(Socials, [{
         key: 'init',
         value: function init() {
-            var _this = this;
-
             var _options = this.options,
                 classNames = _options.classNames,
                 networks = _options.networks;
 
-            var list = this._createElementsList(networks, classNames);
-            this.element.insertBefore(list, null);
-            list.addEventListener('click', function (event) {
-                if (!event.target.dataset.name) return;
-                var networkName = event.target.dataset.name;
-                _this._initNetwork(networkName, config.networks[networkName]);
-            });
+            this.htmlConstructor = new _HtmlMarkup2.default(classNames);
+            var list = this._createElementsList(networks);
+            this.root.insertBefore(list, null);
         }
     }, {
         key: '_initNetwork',
-        value: function _initNetwork(name, params) {
+        value: function _initNetwork(element, name, params) {
             switch (name) {
                 case 'facebook':
-                    new _Facebook2.default(params).show();
-                    return true;
+                    return new _Facebook2.default(element, params, this.htmlConstructor);
                 case 'google':
-                    new _GooglePlus2.default(params).show();
-                    return true;
+                    return new _GooglePlus2.default(element, params);
                 case 'reddit':
-                    new _Reddit2.default(params).show();
-                    return true;
+                    return new _Reddit2.default(element, params);
                 case 'twitter':
-                    new _Twitter2.default(params).show();
-                    return true;
+                    return new _Twitter2.default(element, params);
                 case 'telegram':
-                    new _Telegram2.default(params).show();
-                    return true;
+                    return new _Telegram2.default(element, params);
                 case 'whatsapp':
-                    new _WhatsApp2.default(params).show();
-                    return true;
+                    return new _WhatsApp2.default(element, params);
                 case 'fbmessenger':
-                    new _FBMessenger2.default(params).show();
-                    return true;
+                    return new _FBMessenger2.default(element, params);
                 default:
-                    return false;
+                    return null;
             }
         }
     }, {
         key: '_createElementsList',
-        value: function _createElementsList(networks, classNames) {
-            var css = {
-                block: classNames.block || 'sharing',
-                element: classNames.elements ? '' + classNames.elements : 'sharing__item'
-            };
-            var ul = document.createElement('ul');
-            ul.className = css.block;
+        value: function _createElementsList(networks) {
+            var _this = this;
+
+            var ul = this.htmlConstructor.createListElement();
 
             Object.keys(networks).forEach(function (network) {
-                var el = document.createElement('li');
-                el.className = css.element + ' ' + css.element + '_' + network;
-                el.dataset.name = network;
-                ul.insertBefore(el, null);
+                var el = _this.htmlConstructor.createItemElement(network);
+                _this.htmlConstructor.addToList(el);
+                _this._initNetwork(el, network, config.networks[network]);
             });
             return ul;
         }
@@ -255,7 +261,6 @@ var Socials = function () {
     return Socials;
 }();
 
-document.getElementsByName('title');
 new Socials(document.getElementById('social-container'), config).init();
 
 /***/ }),
@@ -292,12 +297,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Facebook = function (_ShareButton) {
     _inherits(Facebook, _ShareButton);
 
-    function Facebook(params) {
+    function Facebook(element, params, htmlConstructor) {
         _classCallCheck(this, Facebook);
 
-        var _this = _possibleConstructorReturn(this, (Facebook.__proto__ || Object.getPrototypeOf(Facebook)).call(this));
+        var _this = _possibleConstructorReturn(this, (Facebook.__proto__ || Object.getPrototypeOf(Facebook)).call(this, element));
 
+        _this.htmlConstructor = htmlConstructor;
         _this.params = params;
+        /**
+         * test
+         * ***/
+        _this._addCounterElement();
+        _this.counterElement.innerHTML = '5';
         return _this;
     }
 
@@ -315,6 +326,12 @@ var Facebook = function (_ShareButton) {
             var title = this.params.title || document.title;
 
             return baseUrl + 'src=sp&u=' + pageUrl + '&title=' + title;
+        }
+    }, {
+        key: '_addCounterElement',
+        value: function _addCounterElement() {
+            this.counterElement = this.htmlConstructor.createCounterElement();
+            this.element.insertBefore(this.counterElement, null);
         }
     }]);
 
@@ -351,10 +368,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Twitter = function (_ShareButton) {
     _inherits(Twitter, _ShareButton);
 
-    function Twitter(params) {
+    function Twitter(element, params) {
         _classCallCheck(this, Twitter);
 
-        var _this = _possibleConstructorReturn(this, (Twitter.__proto__ || Object.getPrototypeOf(Twitter)).call(this));
+        var _this = _possibleConstructorReturn(this, (Twitter.__proto__ || Object.getPrototypeOf(Twitter)).call(this, element));
 
         _this.params = params;
         return _this;
@@ -384,12 +401,7 @@ var Twitter = function (_ShareButton) {
 exports.default = Twitter;
 
 /***/ }),
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -416,10 +428,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Reddit = function (_ShareButton) {
     _inherits(Reddit, _ShareButton);
 
-    function Reddit(params) {
+    function Reddit(element, params) {
         _classCallCheck(this, Reddit);
 
-        var _this = _possibleConstructorReturn(this, (Reddit.__proto__ || Object.getPrototypeOf(Reddit)).call(this));
+        var _this = _possibleConstructorReturn(this, (Reddit.__proto__ || Object.getPrototypeOf(Reddit)).call(this, element));
 
         _this.params = params;
         return _this;
@@ -429,7 +441,7 @@ var Reddit = function (_ShareButton) {
         key: 'show',
         value: function show() {
             var url = this._getUrl();
-            this.showPopup(url);
+            window.open(url);
         }
     }, {
         key: '_getUrl',
@@ -448,7 +460,7 @@ var Reddit = function (_ShareButton) {
 exports.default = Reddit;
 
 /***/ }),
-/* 11 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -475,10 +487,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var GooglePlus = function (_ShareButton) {
     _inherits(GooglePlus, _ShareButton);
 
-    function GooglePlus(params) {
+    function GooglePlus(element, params) {
         _classCallCheck(this, GooglePlus);
 
-        var _this = _possibleConstructorReturn(this, (GooglePlus.__proto__ || Object.getPrototypeOf(GooglePlus)).call(this));
+        var _this = _possibleConstructorReturn(this, (GooglePlus.__proto__ || Object.getPrototypeOf(GooglePlus)).call(this, element));
 
         _this.params = params;
         return _this;
@@ -511,7 +523,7 @@ var GooglePlus = function (_ShareButton) {
 exports.default = GooglePlus;
 
 /***/ }),
-/* 12 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -538,10 +550,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Telegram = function (_ShareButton) {
     _inherits(Telegram, _ShareButton);
 
-    function Telegram(params) {
+    function Telegram(element, params) {
         _classCallCheck(this, Telegram);
 
-        var _this = _possibleConstructorReturn(this, (Telegram.__proto__ || Object.getPrototypeOf(Telegram)).call(this));
+        var _this = _possibleConstructorReturn(this, (Telegram.__proto__ || Object.getPrototypeOf(Telegram)).call(this, element));
 
         _this.params = params;
         return _this;
@@ -575,7 +587,7 @@ var Telegram = function (_ShareButton) {
 exports.default = Telegram;
 
 /***/ }),
-/* 13 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -602,10 +614,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var WhatsApp = function (_ShareButton) {
     _inherits(WhatsApp, _ShareButton);
 
-    function WhatsApp(params) {
+    function WhatsApp(element, params) {
         _classCallCheck(this, WhatsApp);
 
-        var _this = _possibleConstructorReturn(this, (WhatsApp.__proto__ || Object.getPrototypeOf(WhatsApp)).call(this));
+        var _this = _possibleConstructorReturn(this, (WhatsApp.__proto__ || Object.getPrototypeOf(WhatsApp)).call(this, element));
 
         _this.params = params;
         return _this;
@@ -634,8 +646,7 @@ var WhatsApp = function (_ShareButton) {
 exports.default = WhatsApp;
 
 /***/ }),
-/* 14 */,
-/* 15 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -665,10 +676,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var FBMessenger = function (_ShareButton) {
     _inherits(FBMessenger, _ShareButton);
 
-    function FBMessenger(params) {
+    function FBMessenger(element, params) {
         _classCallCheck(this, FBMessenger);
 
-        var _this = _possibleConstructorReturn(this, (FBMessenger.__proto__ || Object.getPrototypeOf(FBMessenger)).call(this));
+        var _this = _possibleConstructorReturn(this, (FBMessenger.__proto__ || Object.getPrototypeOf(FBMessenger)).call(this, element));
 
         _this.params = params;
         return _this;
@@ -701,6 +712,75 @@ https://www.facebook.com/dialog/send?app_id=140586622674265&link=https%3A%2F%2Fw
 
 
 exports.default = FBMessenger;
+
+/***/ }),
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var HtmlMarkup = function () {
+    function HtmlMarkup(classNames) {
+        _classCallCheck(this, HtmlMarkup);
+
+        this.blockClassName = classNames.block || 'sharing';
+        this.elementClassName = classNames.elements || 'sharing__item';
+        this.counterClassName = classNames.counters || 'sharing__counter';
+        this.linkClassName = classNames.links || 'sharing__link';
+    }
+
+    _createClass(HtmlMarkup, [{
+        key: 'createListElement',
+        value: function createListElement() {
+            this.listElement = document.createElement('ul');
+            this.listElement.className = this.blockClassName;
+            return this.listElement;
+        }
+    }, {
+        key: 'createItemElement',
+        value: function createItemElement(elementName) {
+            var parentElement = document.createElement('li');
+            parentElement.className = '' + this.elementClassName;
+            parentElement.dataset.name = elementName;
+
+            var childElement = document.createElement('span');
+            childElement.className = this.linkClassName + ' ' + this.linkClassName + '_' + elementName;
+            parentElement.insertBefore(childElement, null);
+            return parentElement;
+        }
+    }, {
+        key: 'createCounterElement',
+        value: function createCounterElement() {
+            var el = document.createElement('span');
+            el.className = '' + this.counterClassName;
+            return el;
+        }
+    }, {
+        key: 'addToList',
+        value: function addToList(element) {
+            this.listElement.insertBefore(element, null);
+        }
+    }]);
+
+    return HtmlMarkup;
+}();
+
+exports.default = HtmlMarkup;
 
 /***/ })
 /******/ ]);

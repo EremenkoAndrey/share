@@ -1,9 +1,55 @@
 .sharing {
   list-style: none;
-  margin: 0;
+  margin: 0 -0.2em;
   padding: 0;
 }
+.sharing__item,
+.sharing__counter {
+  display: inline-block;
+  vertical-align: top;
+}
 .sharing__item {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 0.2em;
+}
+.sharing__counter {
+  position: relative;
+  line-height: 30px;
+  font-size: 0.9em;
+  padding: 0 0.5em;
+  margin-left: 8px;
+  border: 1px solid #ccc;
+  border-radius: 0.2em;
+}
+.sharing__counter:after,
+.sharing__counter:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.sharing__counter:after {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  margin-right: -2px;
+  border-bottom: 6px solid transparent;
+  border-top: 6px solid transparent;
+  border-left: 8px solid transparent;
+  border-right: 8px solid #FFF;
+}
+.sharing__counter:before {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-bottom: 6px solid transparent;
+  border-top: 6px solid transparent;
+  border-left: 8px solid transparent;
+  border-right: 8px solid #CCC;
+}
+.sharing__link {
   display: inline-block;
   vertical-align: top;
   width: 32px;
@@ -14,24 +60,24 @@
   background-size: 1300% 100%;
   background-position-y: 0;
 }
-.sharing__item_facebook {
+.sharing__link_facebook {
   background-position-x: -64px;
 }
-.sharing__item_twitter {
+.sharing__link_twitter {
   background-position-x: -32px;
 }
-.sharing__item_reddit {
+.sharing__link_reddit {
   background-position-x: -384px;
 }
-.sharing__item_google {
+.sharing__link_google {
   background-position-x: -160px;
 }
-.sharing__item_telegram {
+.sharing__link_telegram {
   background-position-x: -256px;
 }
-.sharing__item_whatsapp {
+.sharing__link_whatsapp {
   background-position-x: -320px;
 }
-.sharing__item_fbmessenger {
+.sharing__link_fbmessenger {
   background-position-x: -352px;
 }

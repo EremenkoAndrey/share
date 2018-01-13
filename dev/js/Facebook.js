@@ -1,9 +1,15 @@
 import ShareButton from './ShareButton.js';
 
 export default class Facebook extends ShareButton {
-    constructor(params) {
-        super();
+    constructor(element, params, htmlConstructor) {
+        super(element);
+        this.htmlConstructor = htmlConstructor;
         this.params = params;
+        /**
+         * test
+         * ***/
+        this._addCounterElement();
+        this.counterElement.innerHTML = '5';
     }
     show() {
         const url = this._getUrl();
@@ -15,5 +21,10 @@ export default class Facebook extends ShareButton {
         const title = this.params.title || document.title;
 
         return `${baseUrl}src=sp&u=${pageUrl}&title=${title}`;
+    }
+
+    _addCounterElement() {
+        this.counterElement = this.htmlConstructor.createCounterElement();
+        this.element.insertBefore(this.counterElement, null);
     }
 }

@@ -1,4 +1,5 @@
 import './index.less';
+import HtmlMarkup from './js/HtmlMarkup';
 import Facebook from './js/Facebook';
 import Twitter from './js/Twitter';
 import Reddit from './js/Reddit';
@@ -10,7 +11,9 @@ import FBMessenger from './js/FBMessenger';
 const config = {
     classNames: {
         block: 'sharing',
-        elements: 'sharing__item'
+        elements: 'sharing__item',
+        links: 'sharing__link',
+        counters: 'sharing__counter'
     },
     networks: {
         facebook: {
@@ -46,67 +49,49 @@ const config = {
 };
 
 class Socials {
-    constructor(element, options) {
-        this.element = element;
+    constructor(root, options) {
+        this.root = root;
         this.options = options;
     }
 
     init() {
         const { classNames, networks } = this.options;
-        const list = this._createElementsList(networks, classNames);
-        this.element.insertBefore(list, null);
-        list.addEventListener('click', (event) => {
-            if (!event.target.dataset.name) return;
-            const networkName = event.target.dataset.name;
-            this._initNetwork(networkName, config.networks[networkName]);
-        });
+        this.htmlConstructor = new HtmlMarkup(classNames);
+        const list = this._createElementsList(networks);
+        this.root.insertBefore(list, null);
     }
 
-    _initNetwork(name, params) {
+    _initNetwork(element, name, params) {
         switch (name) {
         case 'facebook':
-            new Facebook(params).show();
-            return true;
+            return new Facebook(element, params, this.htmlConstructor);
         case 'google':
-            new GooglePlus(params).show();
-            return true;
+            return new GooglePlus(element, params);
         case 'reddit':
-            new Reddit(params).show();
-            return true;
+            return new Reddit(element, params);
         case 'twitter':
-            new Twitter(params).show();
-            return true;
+            return new Twitter(element, params);
         case 'telegram':
-            new Telegram(params).show();
-            return true;
+            return new Telegram(element, params);
         case 'whatsapp':
-            new WhatsApp(params).show();
-            return true;
+            return new WhatsApp(element, params);
         case 'fbmessenger':
-            new FBMessenger(params).show();
-            return true;
+            return new FBMessenger(element, params);
         default:
-            return false;
+            return null;
         }
     }
 
-    _createElementsList(networks, classNames) {
-        const css = {
-            block: classNames.block || 'sharing',
-            element: classNames.elements ? `${classNames.elements}` : 'sharing__item'
-        };
-        const ul = document.createElement('ul');
-        ul.className = css.block;
+    _createElementsList(networks) {
+        const ul = this.htmlConstructor.createListElement();
 
         Object.keys(networks).forEach((network) => {
-            const el = document.createElement('li');
-            el.className = `${css.element} ${css.element}_${network}`;
-            el.dataset.name = network;
-            ul.insertBefore(el, null);
+            const el = this.htmlConstructor.createItemElement(network);
+            this.htmlConstructor.addToList(el);
+            this._initNetwork(el, network, config.networks[network]);
         });
         return ul;
     }
 }
 
-document.getElementsByName('title');
 new Socials(document.getElementById('social-container'), config).init();

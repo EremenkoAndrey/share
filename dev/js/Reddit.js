@@ -1,13 +1,13 @@
 import ShareButton from './ShareButton.js';
 
 export default class Reddit extends ShareButton {
-    constructor(params) {
-        super();
+    constructor(element, params) {
+        super(element);
         this.params = params;
     }
     show() {
         const url = this._getUrl();
-        this.showPopup(url);
+        window.open(url);
     }
     _getUrl() {
         const baseUrl = 'https://www.reddit.com/submit?';
