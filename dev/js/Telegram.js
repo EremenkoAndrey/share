@@ -14,7 +14,7 @@ export default class Telegram extends ShareButton {
         const pageUrl = window.location.href;
         const text = this.params.text || document.title;
 
-        return `${baseUrl}text=${text}&url=${pageUrl}`;
+        return `${baseUrl}text=${encodeURIComponent(text)}&url=${pageUrl}`;
     }
 }
 

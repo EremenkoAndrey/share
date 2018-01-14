@@ -15,6 +15,6 @@ export default class Twitter extends ShareButton {
         const text = this.params.text || document.title;
         const hashtags = this.params.hashtags || '';
 
-        return `${baseUrl}text=${text}&url=${pageUrl}&hashtags=${hashtags}`;
+        return `${baseUrl}text=${encodeURIComponent(text)}&url=${pageUrl}&hashtags=${encodeURIComponent(hashtags)}`;
     }
 }

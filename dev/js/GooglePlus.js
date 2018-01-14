@@ -14,9 +14,6 @@ export default class GooglePlus extends ShareButton {
         const pageUrl = window.location.href;
         const title = this.params.title || document.title;
 
-        return `${baseUrl}t=${title}&url=${pageUrl}`;
+        return `${baseUrl}t=${encodeURIComponent(title)}&url=${pageUrl}`;
     }
 }
-/*
-
-*/

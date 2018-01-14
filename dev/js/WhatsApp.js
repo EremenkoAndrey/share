@@ -12,8 +12,8 @@ export default class WhatsApp extends ShareButton {
     _getUrl() {
         const baseUrl = 'whatsapp://send?';
         const pageUrl = window.location.href;
-        const text = this.params.text || document.title;
-
-        return `${baseUrl}text=${text} ${pageUrl}`;
+        const text = this.params.text || document.title
+        const concatenatedText = `${text} ${pageUrl}`;
+        return `${baseUrl}text=${encodeURIComponent(concatenatedText)}`;
     }
 }

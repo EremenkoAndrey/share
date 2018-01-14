@@ -20,7 +20,7 @@ export default class Facebook extends ShareButton {
         const pageUrl = window.location.href;
         const title = this.params.title || document.title;
 
-        return `${baseUrl}src=sp&u=${pageUrl}&title=${title}`;
+        return `${baseUrl}src=sp&u=${pageUrl}&title=${encodeURIComponent(title)}`;
     }
 
     _addCounterElement() {

@@ -14,6 +14,6 @@ export default class Reddit extends ShareButton {
         const pageUrl = window.location.href;
         const title = this.params.title || document.title;
 
-        return `${baseUrl}title=${title}&url=${pageUrl}`;
+        return `${baseUrl}title=${encodeURIComponent(title)}&url=${pageUrl}`;
     }
 }

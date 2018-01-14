@@ -125,35 +125,35 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(2);
 
-var _HtmlMarkup = __webpack_require__(16);
+var _HtmlMarkup = __webpack_require__(3);
 
 var _HtmlMarkup2 = _interopRequireDefault(_HtmlMarkup);
 
-var _Facebook = __webpack_require__(3);
+var _Facebook = __webpack_require__(4);
 
 var _Facebook2 = _interopRequireDefault(_Facebook);
 
-var _Twitter = __webpack_require__(4);
+var _Twitter = __webpack_require__(5);
 
 var _Twitter2 = _interopRequireDefault(_Twitter);
 
-var _Reddit = __webpack_require__(5);
+var _Reddit = __webpack_require__(6);
 
 var _Reddit2 = _interopRequireDefault(_Reddit);
 
-var _GooglePlus = __webpack_require__(6);
+var _GooglePlus = __webpack_require__(7);
 
 var _GooglePlus2 = _interopRequireDefault(_GooglePlus);
 
-var _Telegram = __webpack_require__(7);
+var _Telegram = __webpack_require__(8);
 
 var _Telegram2 = _interopRequireDefault(_Telegram);
 
-var _WhatsApp = __webpack_require__(8);
+var _WhatsApp = __webpack_require__(9);
 
 var _WhatsApp2 = _interopRequireDefault(_WhatsApp);
 
-var _FBMessenger = __webpack_require__(9);
+var _FBMessenger = __webpack_require__(10);
 
 var _FBMessenger2 = _interopRequireDefault(_FBMessenger);
 
@@ -282,456 +282,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ShareButton2 = __webpack_require__(0);
-
-var _ShareButton3 = _interopRequireDefault(_ShareButton2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Facebook = function (_ShareButton) {
-    _inherits(Facebook, _ShareButton);
-
-    function Facebook(element, params, htmlConstructor) {
-        _classCallCheck(this, Facebook);
-
-        var _this = _possibleConstructorReturn(this, (Facebook.__proto__ || Object.getPrototypeOf(Facebook)).call(this, element));
-
-        _this.htmlConstructor = htmlConstructor;
-        _this.params = params;
-        /**
-         * test
-         * ***/
-        _this._addCounterElement();
-        _this.counterElement.innerHTML = '5';
-        return _this;
-    }
-
-    _createClass(Facebook, [{
-        key: 'show',
-        value: function show() {
-            var url = this._getUrl();
-            this.showPopup(url);
-        }
-    }, {
-        key: '_getUrl',
-        value: function _getUrl() {
-            var baseUrl = 'https://www.facebook.com/sharer.php?';
-            var pageUrl = window.location.href;
-            var title = this.params.title || document.title;
-
-            return baseUrl + 'src=sp&u=' + pageUrl + '&title=' + title;
-        }
-    }, {
-        key: '_addCounterElement',
-        value: function _addCounterElement() {
-            this.counterElement = this.htmlConstructor.createCounterElement();
-            this.element.insertBefore(this.counterElement, null);
-        }
-    }]);
-
-    return Facebook;
-}(_ShareButton3.default);
-
-exports.default = Facebook;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _ShareButton2 = __webpack_require__(0);
-
-var _ShareButton3 = _interopRequireDefault(_ShareButton2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Twitter = function (_ShareButton) {
-    _inherits(Twitter, _ShareButton);
-
-    function Twitter(element, params) {
-        _classCallCheck(this, Twitter);
-
-        var _this = _possibleConstructorReturn(this, (Twitter.__proto__ || Object.getPrototypeOf(Twitter)).call(this, element));
-
-        _this.params = params;
-        return _this;
-    }
-
-    _createClass(Twitter, [{
-        key: 'show',
-        value: function show() {
-            var url = this._getUrl();
-            this.showPopup(url);
-        }
-    }, {
-        key: '_getUrl',
-        value: function _getUrl() {
-            var baseUrl = 'https://twitter.com/intent/tweet?';
-            var pageUrl = window.location.href;
-            var text = this.params.text || document.title;
-            var hashtags = this.params.hashtags || '';
-
-            return baseUrl + 'text=' + text + '&url=' + pageUrl + '&hashtags=' + hashtags;
-        }
-    }]);
-
-    return Twitter;
-}(_ShareButton3.default);
-
-exports.default = Twitter;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _ShareButton2 = __webpack_require__(0);
-
-var _ShareButton3 = _interopRequireDefault(_ShareButton2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Reddit = function (_ShareButton) {
-    _inherits(Reddit, _ShareButton);
-
-    function Reddit(element, params) {
-        _classCallCheck(this, Reddit);
-
-        var _this = _possibleConstructorReturn(this, (Reddit.__proto__ || Object.getPrototypeOf(Reddit)).call(this, element));
-
-        _this.params = params;
-        return _this;
-    }
-
-    _createClass(Reddit, [{
-        key: 'show',
-        value: function show() {
-            var url = this._getUrl();
-            window.open(url);
-        }
-    }, {
-        key: '_getUrl',
-        value: function _getUrl() {
-            var baseUrl = 'https://www.reddit.com/submit?';
-            var pageUrl = window.location.href;
-            var title = this.params.title || document.title;
-
-            return baseUrl + 'title=' + title + '&url=' + pageUrl;
-        }
-    }]);
-
-    return Reddit;
-}(_ShareButton3.default);
-
-exports.default = Reddit;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _ShareButton2 = __webpack_require__(0);
-
-var _ShareButton3 = _interopRequireDefault(_ShareButton2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var GooglePlus = function (_ShareButton) {
-    _inherits(GooglePlus, _ShareButton);
-
-    function GooglePlus(element, params) {
-        _classCallCheck(this, GooglePlus);
-
-        var _this = _possibleConstructorReturn(this, (GooglePlus.__proto__ || Object.getPrototypeOf(GooglePlus)).call(this, element));
-
-        _this.params = params;
-        return _this;
-    }
-
-    _createClass(GooglePlus, [{
-        key: 'show',
-        value: function show() {
-            var url = this._getUrl();
-            this.showPopup(url);
-        }
-    }, {
-        key: '_getUrl',
-        value: function _getUrl() {
-            var baseUrl = 'https://plus.google.com/share?';
-            var pageUrl = window.location.href;
-            var title = this.params.title || document.title;
-
-            return baseUrl + 't=' + title + '&url=' + pageUrl;
-        }
-    }]);
-
-    return GooglePlus;
-}(_ShareButton3.default);
-/*
-
-*/
-
-
-exports.default = GooglePlus;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _ShareButton2 = __webpack_require__(0);
-
-var _ShareButton3 = _interopRequireDefault(_ShareButton2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Telegram = function (_ShareButton) {
-    _inherits(Telegram, _ShareButton);
-
-    function Telegram(element, params) {
-        _classCallCheck(this, Telegram);
-
-        var _this = _possibleConstructorReturn(this, (Telegram.__proto__ || Object.getPrototypeOf(Telegram)).call(this, element));
-
-        _this.params = params;
-        return _this;
-    }
-
-    _createClass(Telegram, [{
-        key: 'show',
-        value: function show() {
-            var url = this._getUrl();
-            this.showPopup(url);
-        }
-    }, {
-        key: '_getUrl',
-        value: function _getUrl() {
-            var baseUrl = 'https://telegram.me/share/url?';
-            var pageUrl = window.location.href;
-            var text = this.params.text || document.title;
-
-            return baseUrl + 'text=' + text + '&url=' + pageUrl;
-        }
-    }]);
-
-    return Telegram;
-}(_ShareButton3.default);
-
-/*
-
-*/
-
-
-exports.default = Telegram;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _ShareButton2 = __webpack_require__(0);
-
-var _ShareButton3 = _interopRequireDefault(_ShareButton2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var WhatsApp = function (_ShareButton) {
-    _inherits(WhatsApp, _ShareButton);
-
-    function WhatsApp(element, params) {
-        _classCallCheck(this, WhatsApp);
-
-        var _this = _possibleConstructorReturn(this, (WhatsApp.__proto__ || Object.getPrototypeOf(WhatsApp)).call(this, element));
-
-        _this.params = params;
-        return _this;
-    }
-
-    _createClass(WhatsApp, [{
-        key: 'show',
-        value: function show() {
-            var url = this._getUrl();
-            window.open(url);
-        }
-    }, {
-        key: '_getUrl',
-        value: function _getUrl() {
-            var baseUrl = 'whatsapp://send?';
-            var pageUrl = window.location.href;
-            var text = this.params.text || document.title;
-
-            return baseUrl + 'text=' + text + ' ' + pageUrl;
-        }
-    }]);
-
-    return WhatsApp;
-}(_ShareButton3.default);
-
-exports.default = WhatsApp;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _ShareButton2 = __webpack_require__(0);
-
-var _ShareButton3 = _interopRequireDefault(_ShareButton2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/*
-Тут необходим FB SDK
- */
-var FBMessenger = function (_ShareButton) {
-    _inherits(FBMessenger, _ShareButton);
-
-    function FBMessenger(element, params) {
-        _classCallCheck(this, FBMessenger);
-
-        var _this = _possibleConstructorReturn(this, (FBMessenger.__proto__ || Object.getPrototypeOf(FBMessenger)).call(this, element));
-
-        _this.params = params;
-        return _this;
-    }
-
-    _createClass(FBMessenger, [{
-        key: 'show',
-        value: function show() {
-            var url = this._getUrl();
-            window.open(url);
-        }
-    }, {
-        key: '_getUrl',
-        value: function _getUrl() {
-            var baseUrl = 'https://twitter.com/intent/tweet?';
-            var pageUrl = window.location.href;
-            var text = this.params.text || document.title;
-            var hashtags = this.params.hashtags || '';
-
-            return baseUrl + 'text=' + text + '&url=' + pageUrl + '&hashtags=' + hashtags;
-        }
-    }]);
-
-    return FBMessenger;
-}(_ShareButton3.default);
-
-/*
-https://www.facebook.com/dialog/send?app_id=140586622674265&link=https%3A%2F%2Fwww.rt.com%2Fnews%2F415690-no-other-word-but-racist-trumo%2F%23.WljCh-6Hv4c.messenger&redirect_uri=https%3A%2F%2Fwww.addthis.com%2Fmessengerredirect
- */
-
-
-exports.default = FBMessenger;
-
-/***/ }),
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var HtmlMarkup = function () {
@@ -781,6 +331,440 @@ var HtmlMarkup = function () {
 }();
 
 exports.default = HtmlMarkup;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ShareButton2 = __webpack_require__(0);
+
+var _ShareButton3 = _interopRequireDefault(_ShareButton2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Facebook = function (_ShareButton) {
+    _inherits(Facebook, _ShareButton);
+
+    function Facebook(element, params, htmlConstructor) {
+        _classCallCheck(this, Facebook);
+
+        var _this = _possibleConstructorReturn(this, (Facebook.__proto__ || Object.getPrototypeOf(Facebook)).call(this, element));
+
+        _this.htmlConstructor = htmlConstructor;
+        _this.params = params;
+        /**
+         * test
+         * ***/
+        _this._addCounterElement();
+        _this.counterElement.innerHTML = '5';
+        return _this;
+    }
+
+    _createClass(Facebook, [{
+        key: 'show',
+        value: function show() {
+            var url = this._getUrl();
+            this.showPopup(url);
+        }
+    }, {
+        key: '_getUrl',
+        value: function _getUrl() {
+            var baseUrl = 'https://www.facebook.com/sharer.php?';
+            var pageUrl = window.location.href;
+            var title = this.params.title || document.title;
+
+            return baseUrl + 'src=sp&u=' + pageUrl + '&title=' + encodeURIComponent(title);
+        }
+    }, {
+        key: '_addCounterElement',
+        value: function _addCounterElement() {
+            this.counterElement = this.htmlConstructor.createCounterElement();
+            this.element.insertBefore(this.counterElement, null);
+        }
+    }]);
+
+    return Facebook;
+}(_ShareButton3.default);
+
+exports.default = Facebook;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ShareButton2 = __webpack_require__(0);
+
+var _ShareButton3 = _interopRequireDefault(_ShareButton2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Twitter = function (_ShareButton) {
+    _inherits(Twitter, _ShareButton);
+
+    function Twitter(element, params) {
+        _classCallCheck(this, Twitter);
+
+        var _this = _possibleConstructorReturn(this, (Twitter.__proto__ || Object.getPrototypeOf(Twitter)).call(this, element));
+
+        _this.params = params;
+        return _this;
+    }
+
+    _createClass(Twitter, [{
+        key: 'show',
+        value: function show() {
+            var url = this._getUrl();
+            this.showPopup(url);
+        }
+    }, {
+        key: '_getUrl',
+        value: function _getUrl() {
+            var baseUrl = 'https://twitter.com/intent/tweet?';
+            var pageUrl = window.location.href;
+            var text = this.params.text || document.title;
+            var hashtags = this.params.hashtags || '';
+
+            return baseUrl + 'text=' + encodeURIComponent(text) + '&url=' + pageUrl + '&hashtags=' + encodeURIComponent(hashtags);
+        }
+    }]);
+
+    return Twitter;
+}(_ShareButton3.default);
+
+exports.default = Twitter;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ShareButton2 = __webpack_require__(0);
+
+var _ShareButton3 = _interopRequireDefault(_ShareButton2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Reddit = function (_ShareButton) {
+    _inherits(Reddit, _ShareButton);
+
+    function Reddit(element, params) {
+        _classCallCheck(this, Reddit);
+
+        var _this = _possibleConstructorReturn(this, (Reddit.__proto__ || Object.getPrototypeOf(Reddit)).call(this, element));
+
+        _this.params = params;
+        return _this;
+    }
+
+    _createClass(Reddit, [{
+        key: 'show',
+        value: function show() {
+            var url = this._getUrl();
+            window.open(url);
+        }
+    }, {
+        key: '_getUrl',
+        value: function _getUrl() {
+            var baseUrl = 'https://www.reddit.com/submit?';
+            var pageUrl = window.location.href;
+            var title = this.params.title || document.title;
+
+            return baseUrl + 'title=' + encodeURIComponent(title) + '&url=' + pageUrl;
+        }
+    }]);
+
+    return Reddit;
+}(_ShareButton3.default);
+
+exports.default = Reddit;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ShareButton2 = __webpack_require__(0);
+
+var _ShareButton3 = _interopRequireDefault(_ShareButton2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GooglePlus = function (_ShareButton) {
+    _inherits(GooglePlus, _ShareButton);
+
+    function GooglePlus(element, params) {
+        _classCallCheck(this, GooglePlus);
+
+        var _this = _possibleConstructorReturn(this, (GooglePlus.__proto__ || Object.getPrototypeOf(GooglePlus)).call(this, element));
+
+        _this.params = params;
+        return _this;
+    }
+
+    _createClass(GooglePlus, [{
+        key: 'show',
+        value: function show() {
+            var url = this._getUrl();
+            this.showPopup(url);
+        }
+    }, {
+        key: '_getUrl',
+        value: function _getUrl() {
+            var baseUrl = 'https://plus.google.com/share?';
+            var pageUrl = window.location.href;
+            var title = this.params.title || document.title;
+
+            return baseUrl + 't=' + encodeURIComponent(title) + '&url=' + pageUrl;
+        }
+    }]);
+
+    return GooglePlus;
+}(_ShareButton3.default);
+
+exports.default = GooglePlus;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ShareButton2 = __webpack_require__(0);
+
+var _ShareButton3 = _interopRequireDefault(_ShareButton2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Telegram = function (_ShareButton) {
+    _inherits(Telegram, _ShareButton);
+
+    function Telegram(element, params) {
+        _classCallCheck(this, Telegram);
+
+        var _this = _possibleConstructorReturn(this, (Telegram.__proto__ || Object.getPrototypeOf(Telegram)).call(this, element));
+
+        _this.params = params;
+        return _this;
+    }
+
+    _createClass(Telegram, [{
+        key: 'show',
+        value: function show() {
+            var url = this._getUrl();
+            this.showPopup(url);
+        }
+    }, {
+        key: '_getUrl',
+        value: function _getUrl() {
+            var baseUrl = 'https://telegram.me/share/url?';
+            var pageUrl = window.location.href;
+            var text = this.params.text || document.title;
+
+            return baseUrl + 'text=' + encodeURIComponent(text) + '&url=' + pageUrl;
+        }
+    }]);
+
+    return Telegram;
+}(_ShareButton3.default);
+
+/*
+
+*/
+
+
+exports.default = Telegram;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ShareButton2 = __webpack_require__(0);
+
+var _ShareButton3 = _interopRequireDefault(_ShareButton2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WhatsApp = function (_ShareButton) {
+    _inherits(WhatsApp, _ShareButton);
+
+    function WhatsApp(element, params) {
+        _classCallCheck(this, WhatsApp);
+
+        var _this = _possibleConstructorReturn(this, (WhatsApp.__proto__ || Object.getPrototypeOf(WhatsApp)).call(this, element));
+
+        _this.params = params;
+        return _this;
+    }
+
+    _createClass(WhatsApp, [{
+        key: 'show',
+        value: function show() {
+            var url = this._getUrl();
+            window.open(url);
+        }
+    }, {
+        key: '_getUrl',
+        value: function _getUrl() {
+            var baseUrl = 'whatsapp://send?';
+            var pageUrl = window.location.href;
+            var text = this.params.text || document.title;
+            var concatenatedText = text + ' ' + pageUrl;
+            return baseUrl + 'text=' + encodeURIComponent(concatenatedText);
+        }
+    }]);
+
+    return WhatsApp;
+}(_ShareButton3.default);
+
+exports.default = WhatsApp;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ShareButton2 = __webpack_require__(0);
+
+var _ShareButton3 = _interopRequireDefault(_ShareButton2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/*
+ https://developers.facebook.com/docs/sharing/messenger/web
+ */
+var FBMessenger = function (_ShareButton) {
+    _inherits(FBMessenger, _ShareButton);
+
+    function FBMessenger(element, params) {
+        _classCallCheck(this, FBMessenger);
+
+        var _this = _possibleConstructorReturn(this, (FBMessenger.__proto__ || Object.getPrototypeOf(FBMessenger)).call(this, element));
+
+        _this.params = params;
+        return _this;
+    }
+
+    _createClass(FBMessenger, [{
+        key: 'show',
+        value: function show() {
+            var url = this._getUrl();
+            window.open(url);
+        }
+    }, {
+        key: '_getUrl',
+        value: function _getUrl() {
+            var baseUrl = 'fb-messenger://share?';
+            var pageUrl = window.location.href;
+            var appId = 140586622674265;
+
+            return baseUrl + 'link=' + pageUrl + '&app_id=' + appId;
+        }
+    }]);
+
+    return FBMessenger;
+}(_ShareButton3.default);
+
+exports.default = FBMessenger;
 
 /***/ })
 /******/ ]);
