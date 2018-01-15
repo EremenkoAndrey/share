@@ -38,7 +38,7 @@ module.exports = [
                     test: /\.svg/,
                     loader: 'url-loader',
                     query: {
-                        limit: 1000,
+                        limit: 100000,
                         mimetype: 'image/svg+xml',
                         name: 'img/[name].[ext]'
                     }

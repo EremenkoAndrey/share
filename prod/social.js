@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/Share/prod/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -121,39 +121,89 @@ exports.default = ShareButton;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = checkExistProperty;
+/*
+Принимает объект и строковое представление вложенного в объект свойства
+Примеры:
+const obj = {test1:{test5: true}};
+checkExistProperty(obj, 'obj.test1.test5'); // true
+
+const obj = {test1:[{test5: true}]};
+checkExistProperty(obj, 'obj.test1[0].test5'); // true
+checkExistProperty(obj, 'obj.test1.test5'); // false
+return bool
+
+ */
+function checkExistProperty(obj, props) {
+    var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+
+    var arrProps = void 0;
+    if (typeof props === 'string') {
+        var reg = /]\.|\[|\./;
+        arrProps = props.split(reg);
+    } else {
+        arrProps = props;
+    }
+
+    if (Array.isArray(obj)) {
+        var arrIndex = parseInt(arrProps[index], 10);
+        var result = !isNaN(arrIndex) && typeof obj[arrIndex] !== 'undefined';
+
+        if (result && arrProps[index + 1]) {
+            return checkExistProperty(obj[arrProps[index]], props, index + 1);
+        }
+        return result;
+    }
+
+    if (obj.hasOwnProperty(arrProps[index]) && arrProps[index + 1]) {
+        return checkExistProperty(obj[arrProps[index]], props, index + 1);
+    }
+    return obj.hasOwnProperty(arrProps[index]);
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-__webpack_require__(2);
+__webpack_require__(3);
 
-var _HtmlMarkup = __webpack_require__(3);
+var _HtmlMarkup = __webpack_require__(4);
 
 var _HtmlMarkup2 = _interopRequireDefault(_HtmlMarkup);
 
-var _Facebook = __webpack_require__(4);
+var _Facebook = __webpack_require__(5);
 
 var _Facebook2 = _interopRequireDefault(_Facebook);
 
-var _Twitter = __webpack_require__(5);
+var _Twitter = __webpack_require__(6);
 
 var _Twitter2 = _interopRequireDefault(_Twitter);
 
-var _Reddit = __webpack_require__(6);
+var _Reddit = __webpack_require__(7);
 
 var _Reddit2 = _interopRequireDefault(_Reddit);
 
-var _GooglePlus = __webpack_require__(7);
+var _GooglePlus = __webpack_require__(8);
 
 var _GooglePlus2 = _interopRequireDefault(_GooglePlus);
 
-var _Telegram = __webpack_require__(8);
+var _Telegram = __webpack_require__(9);
 
 var _Telegram2 = _interopRequireDefault(_Telegram);
 
-var _WhatsApp = __webpack_require__(9);
+var _WhatsApp = __webpack_require__(10);
 
 var _WhatsApp2 = _interopRequireDefault(_WhatsApp);
 
-var _FBMessenger = __webpack_require__(10);
+var _FBMessenger = __webpack_require__(11);
 
 var _FBMessenger2 = _interopRequireDefault(_FBMessenger);
 
@@ -162,6 +212,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var config = {
+    counters: true,
     classNames: {
         block: 'sharing',
         elements: 'sharing__item',
@@ -225,11 +276,23 @@ var Socials = function () {
         value: function _initNetwork(element, name, params) {
             switch (name) {
                 case 'facebook':
-                    return new _Facebook2.default(element, params, this.htmlConstructor);
+                    {
+                        var facebook = new _Facebook2.default(element, params);
+                        if (this.options.counters) {
+                            facebook.addCounterElement(this.htmlConstructor);
+                        }
+                        return facebook;
+                    }
                 case 'google':
                     return new _GooglePlus2.default(element, params);
                 case 'reddit':
-                    return new _Reddit2.default(element, params);
+                    {
+                        var reddit = new _Reddit2.default(element, params);
+                        if (this.options.counters) {
+                            reddit.addCounterElement(this.htmlConstructor);
+                        }
+                        return reddit;
+                    }
                 case 'twitter':
                     return new _Twitter2.default(element, params);
                 case 'telegram':
@@ -264,13 +327,13 @@ var Socials = function () {
 new Socials(document.getElementById('social-container'), config).init();
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -333,7 +396,7 @@ var HtmlMarkup = function () {
 exports.default = HtmlMarkup;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -349,6 +412,10 @@ var _ShareButton2 = __webpack_require__(0);
 
 var _ShareButton3 = _interopRequireDefault(_ShareButton2);
 
+var _checkExistProperty = __webpack_require__(1);
+
+var _checkExistProperty2 = _interopRequireDefault(_checkExistProperty);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -357,21 +424,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+/*
+Удалить жестко прописанную ссылку на страницу для шаринга
+ */
 var Facebook = function (_ShareButton) {
     _inherits(Facebook, _ShareButton);
 
-    function Facebook(element, params, htmlConstructor) {
+    function Facebook(element, params) {
         _classCallCheck(this, Facebook);
 
         var _this = _possibleConstructorReturn(this, (Facebook.__proto__ || Object.getPrototypeOf(Facebook)).call(this, element));
 
-        _this.htmlConstructor = htmlConstructor;
         _this.params = params;
-        /**
-         * test
-         * ***/
-        _this._addCounterElement();
-        _this.counterElement.innerHTML = '5';
+        _this.config = {
+            shareUrl: 'https://www.facebook.com/sharer.php?',
+            serviceUrl: 'https://graph.facebook.com/?',
+            accessKey: 'EAACEdEose0cBAGZBxsoZCO7PGRtJ0cCZAybcwUsFtSYvvDaDdHElm9VTv4JRg5LmcbTGmuiHK7SU0LbVdUtcR2iWp6VJuvld0VnYlnScJZCdADoiMFaC1GZCza5Q7vCIX3EuFnVJjSXetdVZC9QKxCkMtReZB20qhQgk28LDDIaJwI40sizfZA5smjaAwLm8cJu5ZBZCk1fIGhHwZDZD'
+        };
         return _this;
     }
 
@@ -384,17 +453,45 @@ var Facebook = function (_ShareButton) {
     }, {
         key: '_getUrl',
         value: function _getUrl() {
-            var baseUrl = 'https://www.facebook.com/sharer.php?';
             var pageUrl = window.location.href;
             var title = this.params.title || document.title;
 
-            return baseUrl + 'src=sp&u=' + pageUrl + '&title=' + encodeURIComponent(title);
+            return this.config.shareUrl + 'src=sp&u=' + pageUrl + '&title=' + encodeURIComponent(title);
         }
     }, {
-        key: '_addCounterElement',
-        value: function _addCounterElement() {
-            this.counterElement = this.htmlConstructor.createCounterElement();
-            this.element.insertBefore(this.counterElement, null);
+        key: 'addCounterElement',
+        value: function addCounterElement(htmlConstructor) {
+            var _this2 = this;
+
+            this.getShareCount().then(function (res) {
+                if ((0, _checkExistProperty2.default)(res, 'res.share.share_count')) {
+                    _this2.counterElement = htmlConstructor.createCounterElement();
+                    _this2.element.insertBefore(_this2.counterElement, null);
+                    _this2.counterElement.innerHTML = res.share.share_count;
+                }
+            }).catch(function (err) {
+                console.log('err', err);
+            });
+        }
+    }, {
+        key: 'getShareCount',
+        value: function getShareCount() {
+            var url = this.config.serviceUrl + 'id=https://www.rt.com/news/415690-no-other-word-but-racist-trumo/&access_token=' + this.config.accessKey;
+            return new Promise(function (resolve, reject) {
+                fetch(url, {
+                    method: 'GET',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (res) {
+                    return res.json(res);
+                }).then(function (json) {
+                    return resolve(json);
+                }).catch(function (err) {
+                    return reject(err);
+                });
+            });
         }
     }]);
 
@@ -404,7 +501,7 @@ var Facebook = function (_ShareButton) {
 exports.default = Facebook;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -464,7 +561,7 @@ var Twitter = function (_ShareButton) {
 exports.default = Twitter;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -479,6 +576,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _ShareButton2 = __webpack_require__(0);
 
 var _ShareButton3 = _interopRequireDefault(_ShareButton2);
+
+var _checkExistProperty = __webpack_require__(1);
+
+var _checkExistProperty2 = _interopRequireDefault(_checkExistProperty);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -497,6 +598,10 @@ var Reddit = function (_ShareButton) {
         var _this = _possibleConstructorReturn(this, (Reddit.__proto__ || Object.getPrototypeOf(Reddit)).call(this, element));
 
         _this.params = params;
+        _this.config = {
+            shareUrl: 'https://www.reddit.com/submit?',
+            serviceUrl: 'https://www.reddit.com/api/info.json?'
+        };
         return _this;
     }
 
@@ -509,11 +614,41 @@ var Reddit = function (_ShareButton) {
     }, {
         key: '_getUrl',
         value: function _getUrl() {
-            var baseUrl = 'https://www.reddit.com/submit?';
             var pageUrl = window.location.href;
             var title = this.params.title || document.title;
 
-            return baseUrl + 'title=' + encodeURIComponent(title) + '&url=' + pageUrl;
+            return this.config.shareUrl + 'title=' + encodeURIComponent(title) + '&url=' + pageUrl;
+        }
+    }, {
+        key: 'addCounterElement',
+        value: function addCounterElement(htmlConstructor) {
+            var _this2 = this;
+
+            this.getShareCount().then(function (res) {
+                if ((0, _checkExistProperty2.default)(res, 'res.data.children[0].data.score')) {
+                    _this2.counterElement = htmlConstructor.createCounterElement();
+                    _this2.element.insertBefore(_this2.counterElement, null);
+                    _this2.counterElement.innerHTML = res.data.children[0].data.score;
+                }
+            }).catch(function (err) {
+                console.log('err', err);
+            });
+        }
+    }, {
+        key: 'getShareCount',
+        value: function getShareCount() {
+            var url = this.config.serviceUrl + 'url=https://www.rt.com/news/415883-putin-communist-ideology-christianity/';
+            return new Promise(function (resolve, reject) {
+                fetch(url, {
+                    method: 'GET'
+                }).then(function (res) {
+                    return res.json(res);
+                }).then(function (json) {
+                    return resolve(json);
+                }).catch(function (err) {
+                    return reject(err);
+                });
+            });
         }
     }]);
 
@@ -523,7 +658,7 @@ var Reddit = function (_ShareButton) {
 exports.default = Reddit;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -582,7 +717,7 @@ var GooglePlus = function (_ShareButton) {
 exports.default = GooglePlus;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -646,7 +781,7 @@ var Telegram = function (_ShareButton) {
 exports.default = Telegram;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -705,7 +840,7 @@ var WhatsApp = function (_ShareButton) {
 exports.default = WhatsApp;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

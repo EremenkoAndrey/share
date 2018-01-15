@@ -9,6 +9,7 @@ import WhatsApp from './js/WhatsApp';
 import FBMessenger from './js/FBMessenger';
 
 const config = {
+    counters: true,
     classNames: {
         block: 'sharing',
         elements: 'sharing__item',
@@ -63,12 +64,22 @@ class Socials {
 
     _initNetwork(element, name, params) {
         switch (name) {
-        case 'facebook':
-            return new Facebook(element, params, this.htmlConstructor);
+        case 'facebook': {
+            const facebook = new Facebook(element, params);
+            if (this.options.counters) {
+                facebook.addCounterElement(this.htmlConstructor);
+            }
+            return facebook;
+        }
         case 'google':
             return new GooglePlus(element, params);
-        case 'reddit':
-            return new Reddit(element, params);
+        case 'reddit': {
+            const reddit = new Reddit(element, params);
+            if (this.options.counters) {
+                reddit.addCounterElement(this.htmlConstructor);
+            }
+            return reddit;
+        }
         case 'twitter':
             return new Twitter(element, params);
         case 'telegram':
